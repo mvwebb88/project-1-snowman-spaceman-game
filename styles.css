@@ -1,0 +1,133 @@
+/* Basic page styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e3f6ff; /* light blue winter background */
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* prevents side-scrolling */
+}
+
+/* Simple header */
+h1 {
+  padding: 20px;
+  margin: 0;
+  color: #024b7a;
+  font-size: 32px;
+}
+
+/* Normal paragraph styling */
+p {
+  margin-top: 10px;
+  color: #024b7a;
+}
+
+/* Snowman image */
+#snowman-img {
+  width: 200px;
+  margin: 20px 0;
+}
+
+/* Wrong guesses left text */
+#guesses-left {
+  font-size: 18px;
+  font-weight: bold;
+  color: #024b7a;
+  margin-bottom: 15px;
+}
+
+/* Hidden word display (underscores) */
+#word-display {
+  font-size: 32px;
+  letter-spacing: 15px; /* spacing between underscores */
+  margin: 20px 0;
+  color: #024b7a;
+}
+
+/* Game message (win/lose/already guessed) */
+#message {
+  font-size: 20px;
+  min-height: 30px; /* keeps layout from shifting */
+  margin: 10px 0;
+  color: #024b7a;
+}
+
+/* Keyboard letter buttons */
+#keyboard button {
+  margin: 5px;
+  padding: 10px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid #024b7a;
+  border-radius: 5px;
+  color: #024b7a;
+}
+
+/* Hover effect for buttons */
+#keyboard button:hover {
+  background-color: #ccecff;
+}
+
+/* Reset button styling */
+#reset-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #4cb1ff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+#reset-btn:hover {
+  background-color: #1a8be0;
+}
+
+/* Keep the game above falling snowflakes */
+#snowman-img, #keyboard, #reset-btn, #word-display, p, h1, #message {
+  position: relative;
+  z-index: 10;
+}
+
+/* Falling Snowflakes: container */
+.snowflakes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* snow won't block buttons */
+  overflow: hidden;
+  z-index: 0; /* snow behind game elements */
+}
+
+/* Individual snowflakes */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  font-size: 24px;
+  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Position & speed of each snowflake */
+.snowflake:nth-child(1) { left: 10%; animation-duration: 6s; }
+.snowflake:nth-child(2) { left: 20%; animation-duration: 9s; }
+.snowflake:nth-child(3) { left: 30%; animation-duration: 7s; }
+.snowflake:nth-child(4) { left: 45%; animation-duration: 5s; }
+.snowflake:nth-child(5) { left: 55%; animation-duration: 8s; }
+.snowflake:nth-child(6) { left: 70%; animation-duration: 6s; }
+.snowflake:nth-child(7) { left: 80%; animation-duration: 9s; }
+.snowflake:nth-child(8) { left: 90%; animation-duration: 7s; }
+
+/* Falling animation */
+@keyframes fall {
+  0%   { transform: translateY(-10px); }
+  100% { transform: translateY(100vh); }
+}
+
