@@ -6,7 +6,9 @@
   <title>Snowman Rescue Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <!-- Falling Snowflakes -->
   <div class="snowflakes" aria-hidden="true">
     <div class="snowflake">❄️</div>
     <div class="snowflake">❄️</div>
@@ -17,17 +19,37 @@
     <div class="snowflake">❄️</div>
     <div class="snowflake">❄️</div>
   </div>
-  <h1>❄️ Snowman Rescue ❄️</h1>
-  <p>Guess the winter word before the snowman melts!</p>
-  <img id="snowman-img" src="images/snowman0.png" alt="Snowman">
-  <p id="guesses-left">Wrong guesses left: 6</p>
-  <div id="word-display"></div>
-  <p id="message">Guess a letter to begin!</p>
-  <div id="keyboard"></div>
-  <button id="reset-btn">Play Again</button>
-  <script src="app.js"></script>
 
+  <!-- Main game card -->
+  <div id="game-container">
+    <h1>❄️ Snowman Rescue ❄️</h1>
+    <p>Guess the winter word before the snowman melts!</p>
+
+    <!-- Snowman image -->
+    <img id="snowman-img" src="images/snowman0.png" alt="Snowman">
+
+    <!-- Wrong guesses left -->
+    <p id="guesses-left">Wrong guesses left: 6</p>
+
+    <!-- Hidden word display (_ _ _ _) -->
+    <div id="word-display"></div>
+
+    <!-- Game message -->
+    <p id="message">Guess a letter to begin!</p>
+
+    <!-- Wrong letters list -->
+    <p id="wrong-letters">Wrong letters: </p>
+
+    <!-- On-screen keyboard -->
+    <div id="keyboard"></div>
+
+    <!-- Reset button -->
+    <button id="reset-btn">Play Again</button>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
+
 
 
