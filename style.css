@@ -1,22 +1,22 @@
 /* Basic page styling */
 body {
   font-family: Arial, sans-serif;
-  background-color: #e3f6ff; /* light blue winter background */
+  background-color: #87ceeb; /* sky blue */
   text-align: center;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* prevents side-scrolling */
+  overflow-x: hidden; /* no sideways scrolling */
 }
 
-/* Simple header */
+/* Game title */
 h1 {
-  padding: 20px;
+  padding: 20px 10px;
   margin: 0;
   color: #024b7a;
   font-size: 32px;
 }
 
-/* Normal paragraph styling */
+/* Paragraph text */
 p {
   margin-top: 10px;
   color: #024b7a;
@@ -28,31 +28,28 @@ p {
   margin: 20px 0;
 }
 
-/* Wrong guesses left text */
+/* Wrong guesses left */
 #guesses-left {
   font-size: 18px;
   font-weight: bold;
-  color: #024b7a;
   margin-bottom: 15px;
 }
 
-/* Hidden word display (underscores) */
+/* Hidden word display (_ _ _ _) */
 #word-display {
   font-size: 32px;
-  letter-spacing: 15px; /* spacing between underscores */
+  letter-spacing: 15px;
   margin: 20px 0;
-  color: #024b7a;
 }
 
-/* Game message (win/lose/already guessed) */
+/* Game message (win/lose/info) */
 #message {
   font-size: 20px;
-  min-height: 30px; /* keeps layout from shifting */
+  min-height: 30px;
   margin: 10px 0;
-  color: #024b7a;
 }
 
-/* Keyboard letter buttons */
+/* Keyboard buttons */
 #keyboard button {
   margin: 5px;
   padding: 10px 12px;
@@ -64,12 +61,11 @@ p {
   color: #024b7a;
 }
 
-/* Hover effect for buttons */
 #keyboard button:hover {
   background-color: #ccecff;
 }
 
-/* Reset button styling */
+/* Reset button */
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
@@ -85,25 +81,31 @@ p {
   background-color: #1a8be0;
 }
 
-/* Keep the game above falling snowflakes */
-#snowman-img, #keyboard, #reset-btn, #word-display, p, h1, #message {
+/* Make sure game content stays above the snowflakes */
+#snowman-img,
+#keyboard,
+#reset-btn,
+#word-display,
+p,
+h1,
+#message {
   position: relative;
   z-index: 10;
 }
 
-/* Falling Snowflakes: container */
+/* Falling snowflakes container */
 .snowflakes {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* snow won't block buttons */
+  pointer-events: none; /* don't block clicks */
   overflow: hidden;
-  z-index: 0; /* snow behind game elements */
+  z-index: 0; /* behind the game */
 }
 
-/* Individual snowflakes */
+/* Individual snowflake */
 .snowflake {
   position: absolute;
   top: -10px;
@@ -115,7 +117,7 @@ p {
   animation-iteration-count: infinite;
 }
 
-/* Position & speed of each snowflake */
+/* Position + speed of each snowflake */
 .snowflake:nth-child(1) { left: 10%; animation-duration: 6s; }
 .snowflake:nth-child(2) { left: 20%; animation-duration: 9s; }
 .snowflake:nth-child(3) { left: 30%; animation-duration: 7s; }
