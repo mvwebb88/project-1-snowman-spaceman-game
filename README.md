@@ -1,4 +1,8 @@
 ❄️ Snowman Rescue ❄️ — A Winter Word-Guessing Game
+<p align="center">
+  <img src="./images/snowmanRescueLogo.png" width="250" alt="Snowman Rescue Logo">
+</p>
+
 
 A cozy winter-themed browser game built for GA SEB Unit 1
 
