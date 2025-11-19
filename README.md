@@ -54,7 +54,6 @@ Here are some planned stretch goals for future improvement:
 
 ❄️ Add difficulty levels (Easy / Medium / Hard)
 ⛄ Add more snowman frames for smoother animation and more chances to guess
-🔤 Add an on-screen word hint system
 🔊 Add winter sound effects (e.g., wind, chimes)
 📱 Improve mobile responsiveness
 🎨 Add multiple themes (fall, spring, halloween, etc.)
