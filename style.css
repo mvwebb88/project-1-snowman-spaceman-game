@@ -12,13 +12,13 @@ body {
 /* Main game card */
 #game-container {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 60px auto 40px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
-  z-index: 10; /* above snowflakes */
+  z-index: 10; /* above snow & behind confetti */
 }
 
 /* Title */
@@ -33,9 +33,9 @@ p {
   margin: 8px 0;
 }
 
-/* Snowman image (even if it’s just one image for now) */
+/* Snowman image */
 #snowman-img {
-  width: 180px;
+  width: 200px;
   margin: 15px 0 10px;
 }
 
@@ -74,6 +74,10 @@ p {
 }
 
 /* Keyboard letter buttons */
+#keyboard {
+  margin-top: 15px;
+}
+
 #keyboard button {
   margin: 4px;
   padding: 8px 10px;
@@ -85,8 +89,13 @@ p {
   color: #000;
 }
 
-#keyboard button:hover {
+#keyboard button:hover:not(:disabled) {
   background-color: #f0f8ff;
+}
+
+#keyboard button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Reset button */
@@ -123,45 +132,66 @@ p {
   100% { transform: scale(1); }
 }
 
-/* Falling Snowflakes: container */
+/* ❄️ Simple Falling Snowflakes ❄️ */
 .snowflakes {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* don't block clicks */
-  overflow: hidden;
-  z-index: 0; /* behind the game */
+  pointer-events: none;
+  z-index: 1; /* behind game card */
 }
 
-/* Individual snowflake */
 .snowflake {
   position: absolute;
   top: -10px;
-  color: white;
   font-size: 24px;
-  user-select: none;
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation: fall 10s linear infinite;
+  color: white;
 }
 
-/* Position + speed of each snowflake */
-.snowflake:nth-child(1) { left: 10%; animation-duration: 6s; }
-.snowflake:nth-child(2) { left: 20%; animation-duration: 9s; }
-.snowflake:nth-child(3) { left: 30%; animation-duration: 7s; }
-.snowflake:nth-child(4) { left: 45%; animation-duration: 5s; }
-.snowflake:nth-child(5) { left: 55%; animation-duration: 8s; }
-.snowflake:nth-child(6) { left: 70%; animation-duration: 6s; }
-.snowflake:nth-child(7) { left: 80%; animation-duration: 9s; }
-.snowflake:nth-child(8) { left: 90%; animation-duration: 7s; }
+/* Different positions & speeds */
+.snowflake:nth-child(1) { left: 10%; animation-duration: 8s; }
+.snowflake:nth-child(2) { left: 20%; animation-duration: 10s; }
+.snowflake:nth-child(3) { left: 30%; animation-duration: 12s; }
+.snowflake:nth-child(4) { left: 40%; animation-duration: 9s; }
+.snowflake:nth-child(5) { left: 50%; animation-duration: 13s; }
+.snowflake:nth-child(6) { left: 60%; animation-duration: 7s; }
+.snowflake:nth-child(7) { left: 70%; animation-duration: 11s; }
+.snowflake:nth-child(8) { left: 80%; animation-duration: 9s; }
 
-/* Falling animation */
 @keyframes fall {
-  0%   { transform: translateY(-10px); }
-  100% { transform: translateY(100vh); }
+  0% {
+    transform: translateY(-10vh);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
 }
+
+/* 🎉 Confetti elements */
+.confetti {
+  position: fixed;
+  top: -20px;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 20; /* above everything */
+  animation: confettiFall 3s ease-in forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
 
 
 

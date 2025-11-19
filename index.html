@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snowman Rescue Game</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <!-- Falling Snowflakes -->
+  <!-- ❄️ Simple falling snowflakes overlay -->
   <div class="snowflakes" aria-hidden="true">
     <div class="snowflake">❄️</div>
     <div class="snowflake">❄️</div>
@@ -20,38 +19,31 @@
     <div class="snowflake">❄️</div>
   </div>
 
-  <!-- Main game card -->
+  <!-- Main game container -->
   <div id="game-container">
     <h1>❄️ Snowman Rescue ❄️</h1>
     <p>Guess the winter word before the snowman melts!</p>
 
-    <!-- Snowman image -->
-    <img id="snowman-img" src="images/snowman0.png" alt="Snowman">
+    <img id="snowman-img" src="images/snowman0.png" alt="Snowman" />
 
+    <p id="guesses-left">Wrong guesses left: 5</p>
 
-
-    <!-- Wrong guesses left -->
-    <p id="guesses-left">Wrong guesses left: 6</p>
-
-    <!-- Hidden word display (_ _ _ _) -->
     <div id="word-display"></div>
 
-    <!-- Game message -->
-    <p id="message">Guess a letter to begin!</p>
+    <p id="message">Guess a letter to start warming up! ❄️</p>
 
-    <!-- Wrong letters list -->
     <p id="wrong-letters">Wrong letters: </p>
 
-    <!-- On-screen keyboard -->
     <div id="keyboard"></div>
 
-    <!-- Reset button -->
     <button id="reset-btn">Play Again</button>
   </div>
 
   <script src="app.js"></script>
 </body>
 </html>
+
+
 
 
 

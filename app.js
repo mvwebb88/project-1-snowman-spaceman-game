@@ -1,10 +1,9 @@
 // Snowman Rescue Game - app.js
-// Final version: 5 wrong guesses, 6 snowman frames
-// images/snowman0.png, snowman1.jpeg ... snowman5.jpeg
+// Final version: 5 wrong guesses, 6 snowman frames, snowflakes, confetti
 
-// ----------------------
+// -----------------------------
 // Word list
-// ----------------------
+// -----------------------------
 const winterWords = [
   "SNOW",
   "MITTENS",
@@ -25,9 +24,9 @@ const winterWords = [
 // We have frames 0–5, so player gets 5 wrong guesses
 const MAX_WRONG_GUESSES = 5;
 
-// ----------------------
+// -----------------------------
 // Game state variables
-// ----------------------
+// -----------------------------
 let secretWord = "";
 let displayedWord = [];
 let guessedLetters = [];
@@ -35,9 +34,9 @@ let wrongLetters = [];
 let wrongGuessCount = 0; // 0–5
 let gameStatus = "playing"; // "playing", "won", "lost"
 
-// ----------------------
+// -----------------------------
 // Cached DOM elements
-// ----------------------
+// -----------------------------
 const snowmanImgEl = document.getElementById("snowman-img");
 const guessesLeftEl = document.getElementById("guesses-left");
 const wordDisplayEl = document.getElementById("word-display");
@@ -54,7 +53,7 @@ init();
    init: start / restart a game
 ------------------------------ */
 function init() {
-  // 1. Pick a random word
+  // 1. Pick a random winter word
   const randomIndex = Math.floor(Math.random() * winterWords.length);
   secretWord = winterWords[randomIndex];
 
@@ -75,6 +74,10 @@ function init() {
   messageEl.className = "";
   wrongLettersEl.textContent = "Wrong letters: ";
   gameContainerEl.classList.remove("win", "lose");
+
+  // Clear any leftover confetti (in case of replay)
+  const oldConfetti = document.querySelectorAll(".confetti");
+  oldConfetti.forEach((c) => c.remove());
 
   // 5. Rebuild keyboard
   generateKeyboard();
@@ -130,6 +133,7 @@ function handleGuess(letter, button) {
       messageEl.className = "win-message";
       gameContainerEl.classList.add("win");
       disableAllButtons();
+      startConfetti(); // 🎉 trigger confetti on win
     }
   } else {
     // Wrong guess
@@ -179,9 +183,9 @@ function handleWrongGuess(letter) {
 
 /* --------------------------------------------------
    updateSnowmanImage: match wrongGuessCount to file
+   Frame 0 = PNG, Frames 1–5 = JPEG
 --------------------------------------------------- */
 function updateSnowmanImage() {
-  // Frame 0 is a PNG, frames 1–5 are JPEGs
   if (wrongGuessCount === 0) {
     snowmanImgEl.src = "images/snowman0.png";
   } else if (wrongGuessCount >= 1 && wrongGuessCount <= 5) {
@@ -197,10 +201,35 @@ function disableAllButtons() {
   buttons.forEach((btn) => (btn.disabled = true));
 }
 
+/* -----------------------------------------------
+   🎉 Simple Confetti Explosion on Win
+------------------------------------------------ */
+function startConfetti() {
+  for (let i = 0; i < 40; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    // Random emoji for fun
+    const symbols = ["❄️", "✨", "💙", "⛄"];
+    confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    confetti.style.fontSize = (Math.random() * 20 + 20) + "px";
+
+    document.body.appendChild(confetti);
+
+    // Remove after animation
+    setTimeout(() => confetti.remove(), 4000);
+  }
+}
+
 /* -------------------------------------------
    Reset button: start a brand new snowman 🙂
 -------------------------------------------- */
 resetBtnEl.addEventListener("click", init);
+
+
 
 
 
