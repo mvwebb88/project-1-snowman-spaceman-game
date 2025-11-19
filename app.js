@@ -1,23 +1,43 @@
-// Snowman Rescue Game - app.js (image-test version)
+// Snowman Rescue Game - app.js
+// Final version: 5 wrong guesses, 6 snowman frames
+// images/snowman0.png, snowman1.jpeg ... snowman5.jpeg
 
+// ----------------------
 // Word list
+// ----------------------
 const winterWords = [
-  "SNOW", "MITTENS", "COCOA", "PENGUIN", "SLEIGH",
-  "SCARF", "FROST", "ICICLE", "SNOWMAN", "GLACIER",
-  "BLIZZARD", "SNOWBALL", "CHILL", "FIREPLACE"
+  "SNOW",
+  "MITTENS",
+  "COCOA",
+  "PENGUIN",
+  "SLEIGH",
+  "SCARF",
+  "FROST",
+  "ICICLE",
+  "SNOWMAN",
+  "GLACIER",
+  "BLIZZARD",
+  "SNOWBALL",
+  "CHILL",
+  "FIREPLACE"
 ];
 
-const MAX_WRONG_GUESSES = 6;
+// We have frames 0–5, so player gets 5 wrong guesses
+const MAX_WRONG_GUESSES = 5;
 
-// Game state
+// ----------------------
+// Game state variables
+// ----------------------
 let secretWord = "";
 let displayedWord = [];
 let guessedLetters = [];
 let wrongLetters = [];
-let wrongGuessCount = 0;
-let gameStatus = "playing";
+let wrongGuessCount = 0; // 0–5
+let gameStatus = "playing"; // "playing", "won", "lost"
 
-// DOM references
+// ----------------------
+// Cached DOM elements
+// ----------------------
 const snowmanImgEl = document.getElementById("snowman-img");
 const guessesLeftEl = document.getElementById("guesses-left");
 const wordDisplayEl = document.getElementById("word-display");
@@ -27,27 +47,28 @@ const resetBtnEl = document.getElementById("reset-btn");
 const wrongLettersEl = document.getElementById("wrong-letters");
 const gameContainerEl = document.getElementById("game-container");
 
-// Start the game
+// Start the first game when the page loads
 init();
 
+/* -----------------------------
+   init: start / restart a game
+------------------------------ */
 function init() {
-  // Choose word
+  // 1. Pick a random word
   const randomIndex = Math.floor(Math.random() * winterWords.length);
   secretWord = winterWords[randomIndex];
 
-  // Build blank word display
+  // 2. Create underscores for each letter
   displayedWord = Array(secretWord.length).fill("_");
 
+  // 3. Reset state
   guessedLetters = [];
   wrongLetters = [];
   wrongGuessCount = 0;
   gameStatus = "playing";
 
-  // ❗ FORCE IMAGE TO SNOWMAN0.JFIF ONLY
-  // This guarantees your image loads for now.
-  snowmanImgEl.src = "images/snowman0.png";
-
-
+  // 4. Reset UI
+  updateSnowmanImage(); // shows snowman0.png
   guessesLeftEl.textContent = "Wrong guesses left: " + MAX_WRONG_GUESSES;
   wordDisplayEl.textContent = displayedWord.join(" ");
   messageEl.textContent = "Guess a letter to start warming up! ❄️";
@@ -55,9 +76,13 @@ function init() {
   wrongLettersEl.textContent = "Wrong letters: ";
   gameContainerEl.classList.remove("win", "lose");
 
+  // 5. Rebuild keyboard
   generateKeyboard();
 }
 
+/* ---------------------------------
+   generateKeyboard: make A–Z keys
+---------------------------------- */
 function generateKeyboard() {
   keyboardEl.innerHTML = "";
 
@@ -75,11 +100,15 @@ function generateKeyboard() {
   }
 }
 
+/* -----------------------------------------------
+   handleGuess: what happens when you click a key
+------------------------------------------------ */
 function handleGuess(letter, button) {
   if (gameStatus !== "playing") return;
 
   letter = letter.toUpperCase();
 
+  // Already guessed?
   if (guessedLetters.includes(letter)) {
     messageEl.textContent = `You already tried "${letter}". Pick a new one! 😉`;
     return;
@@ -89,9 +118,12 @@ function handleGuess(letter, button) {
   if (button) button.disabled = true;
 
   if (secretWord.includes(letter)) {
-    revealLetter(letter);
+    // Correct guess
+    revealLetterInWord(letter);
     messageEl.textContent = `Nice! "${letter}" warmed things up! 🔥`;
+    messageEl.className = "";
 
+    // Check win
     if (!displayedWord.includes("_")) {
       gameStatus = "won";
       messageEl.textContent = "You win! You saved the snowman! ☃️";
@@ -100,11 +132,15 @@ function handleGuess(letter, button) {
       disableAllButtons();
     }
   } else {
+    // Wrong guess
     handleWrongGuess(letter);
   }
 }
 
-function revealLetter(letter) {
+/* -------------------------------------------------
+   revealLetterInWord: fill in correct letter spots
+-------------------------------------------------- */
+function revealLetterInWord(letter) {
   for (let i = 0; i < secretWord.length; i++) {
     if (secretWord[i] === letter) {
       displayedWord[i] = letter;
@@ -113,37 +149,59 @@ function revealLetter(letter) {
   wordDisplayEl.textContent = displayedWord.join(" ");
 }
 
+/* ---------------------------------------------
+   handleWrongGuess: update for wrong guess
+---------------------------------------------- */
 function handleWrongGuess(letter) {
   wrongGuessCount++;
 
   wrongLetters.push(letter);
   wrongLettersEl.textContent = "Wrong letters: " + wrongLetters.join(", ");
 
-  // ❗ DO *NOT* CHANGE THE IMAGE YET
-  // Once snowman0.jfif shows, we will re-enable:
-  // snowmanImgEl.src = "images/snowman" + wrongGuessCount + ".jfif";
+  // Update snowman image based on wrongGuessCount
+  updateSnowmanImage();
 
-  guessesLeftEl.textContent =
-    "Wrong guesses left: " + (MAX_WRONG_GUESSES - wrongGuessCount);
+  const guessesLeft = MAX_WRONG_GUESSES - wrongGuessCount;
+  guessesLeftEl.textContent = "Wrong guesses left: " + guessesLeft;
 
   if (wrongGuessCount >= MAX_WRONG_GUESSES) {
     gameStatus = "lost";
     messageEl.textContent =
-      "Oh no! The snowman melted! The word was: " + secretWord;
+      "Oh no! The snowman melted! The word was: " + secretWord + ". Try again to rescue the next one! ❄️";
     messageEl.className = "lose-message";
     gameContainerEl.classList.add("lose");
     disableAllButtons();
   } else {
     messageEl.textContent = `"${letter}" wasn't it. The snowman shivers... ❄️`;
+    messageEl.className = "";
   }
 }
 
-function disableAllButtons() {
-  const btns = keyboardEl.querySelectorAll("button");
-  btns.forEach((b) => (b.disabled = true));
+/* --------------------------------------------------
+   updateSnowmanImage: match wrongGuessCount to file
+--------------------------------------------------- */
+function updateSnowmanImage() {
+  // Frame 0 is a PNG, frames 1–5 are JPEGs
+  if (wrongGuessCount === 0) {
+    snowmanImgEl.src = "images/snowman0.png";
+  } else if (wrongGuessCount >= 1 && wrongGuessCount <= 5) {
+    snowmanImgEl.src = `images/snowman${wrongGuessCount}.jpeg`;
+  }
 }
 
+/* -----------------------------------------
+   disableAllButtons: stop input after game
+------------------------------------------ */
+function disableAllButtons() {
+  const buttons = keyboardEl.querySelectorAll("button");
+  buttons.forEach((btn) => (btn.disabled = true));
+}
+
+/* -------------------------------------------
+   Reset button: start a brand new snowman 🙂
+-------------------------------------------- */
 resetBtnEl.addEventListener("click", init);
+
 
 
 
