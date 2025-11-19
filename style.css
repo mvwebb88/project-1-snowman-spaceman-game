@@ -191,6 +191,35 @@ p {
   }
 }
 
+/* Hint button */
+#hint-btn {
+  margin-top: 10px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 2px dashed #1a8be0;
+  border-radius: 5px;
+  color: #000;
+}
+
+#hint-btn:hover:not(:disabled) {
+  background-color: #f0f8ff;
+}
+
+#hint-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Hint text */
+#hint-text {
+  margin-top: 8px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+
 
 
 

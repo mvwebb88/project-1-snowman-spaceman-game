@@ -1,5 +1,5 @@
 // Snowman Rescue Game - app.js
-// Final version: 5 wrong guesses, 6 snowman frames, snowflakes, confetti
+// Final version: 5 wrong guesses, 6 snowman frames, snowflakes, confetti, hint feature
 
 // -----------------------------
 // Word list
@@ -21,6 +21,24 @@ const winterWords = [
   "FIREPLACE"
 ];
 
+// Matching hint for each winter word
+const hints = {
+  SNOW: "Falls from the sky in cold weather.",
+  MITTENS: "You wear these on your hands to keep warm.",
+  COCOA: "A hot drink often topped with marshmallows.",
+  PENGUIN: "A black and white bird that can't fly.",
+  SLEIGH: "A winter vehicle that slides over snow.",
+  SCARF: "You wrap this around your neck when it's cold.",
+  FROST: "Thin ice that forms on surfaces in the cold.",
+  ICICLE: "A hanging spike of ice.",
+  SNOWMAN: "A figure made of stacked snowballs.",
+  GLACIER: "A large, slow-moving river of ice.",
+  BLIZZARD: "A very strong snowstorm.",
+  SNOWBALL: "Something you throw in a playful winter fight.",
+  CHILL: "Another word for cold.",
+  FIREPLACE: "You sit by this to warm up indoors."
+};
+
 // We have frames 0–5, so player gets 5 wrong guesses
 const MAX_WRONG_GUESSES = 5;
 
@@ -33,6 +51,7 @@ let guessedLetters = [];
 let wrongLetters = [];
 let wrongGuessCount = 0; // 0–5
 let gameStatus = "playing"; // "playing", "won", "lost"
+let hintUsed = false;      // Track if hint used this round
 
 // -----------------------------
 // Cached DOM elements
@@ -45,6 +64,8 @@ const keyboardEl = document.getElementById("keyboard");
 const resetBtnEl = document.getElementById("reset-btn");
 const wrongLettersEl = document.getElementById("wrong-letters");
 const gameContainerEl = document.getElementById("game-container");
+const hintBtnEl = document.getElementById("hint-btn");
+const hintTextEl = document.getElementById("hint-text");
 
 // Start the first game when the page loads
 init();
@@ -65,6 +86,7 @@ function init() {
   wrongLetters = [];
   wrongGuessCount = 0;
   gameStatus = "playing";
+  hintUsed = false;
 
   // 4. Reset UI
   updateSnowmanImage(); // shows snowman0.png
@@ -73,6 +95,8 @@ function init() {
   messageEl.textContent = "Guess a letter to start warming up! ❄️";
   messageEl.className = "";
   wrongLettersEl.textContent = "Wrong letters: ";
+  hintTextEl.textContent = "";
+  hintBtnEl.disabled = false;
   gameContainerEl.classList.remove("win", "lose");
 
   // Clear any leftover confetti (in case of replay)
@@ -134,6 +158,7 @@ function handleGuess(letter, button) {
       gameContainerEl.classList.add("win");
       disableAllButtons();
       startConfetti(); // 🎉 trigger confetti on win
+      hintBtnEl.disabled = true; // no hint after game ends
     }
   } else {
     // Wrong guess
@@ -175,6 +200,7 @@ function handleWrongGuess(letter) {
     messageEl.className = "lose-message";
     gameContainerEl.classList.add("lose");
     disableAllButtons();
+    hintBtnEl.disabled = true; // no hint after game ends
   } else {
     messageEl.textContent = `"${letter}" wasn't it. The snowman shivers... ❄️`;
     messageEl.className = "";
@@ -201,6 +227,19 @@ function disableAllButtons() {
   buttons.forEach((btn) => (btn.disabled = true));
 }
 
+/* ---------------------------------------
+   showHint: display a hint for this word
+---------------------------------------- */
+function showHint() {
+  if (gameStatus !== "playing" || hintUsed) return;
+
+  hintUsed = true;
+  hintBtnEl.disabled = true;
+
+  const hint = hints[secretWord] || "No hint available for this word.";
+  hintTextEl.textContent = "Hint: " + hint;
+}
+
 /* -----------------------------------------------
    🎉 Simple Confetti Explosion on Win
 ------------------------------------------------ */
@@ -225,9 +264,11 @@ function startConfetti() {
 }
 
 /* -------------------------------------------
-   Reset button: start a brand new snowman 🙂
+   Event listeners
 -------------------------------------------- */
 resetBtnEl.addEventListener("click", init);
+hintBtnEl.addEventListener("click", showHint);
+
 
 
 
