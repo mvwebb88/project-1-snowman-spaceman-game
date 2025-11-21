@@ -24,7 +24,9 @@ I wanted to practice building an interactive UI with visual feedback
 
 📄 Planning Materials
 
-Pseudocode
+Pseudocode:
+
+https://github.com/mvwebb88/project-1-snowman-spaceman-game/commit/3c5edd5112e9bde39a9ed0e47b8c5bfa9ec39fb4
 
 📝 How to Play
 
@@ -39,7 +41,7 @@ Click Play Again to start a new round.
 🙌 Attributions
 
 This section lists helpful resources and assets used to build the game.
-Snowman images — found through a Google search 
+Snowman images — found through a Google search: https://www.bing.com/images/search?q=snowman+melted+sequence&form=HDRSC3&first=1
 Snowflake CSS animation inspiration — winter colors
 Emojis — standard characters 😊
 Confetti effect — custom JavaScript (no external libraries)
