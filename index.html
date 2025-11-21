@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Snowman Rescue Game</title>
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- ❄️ Simple falling snowflakes overlay -->
+  <!-- ❄️ Simple falling snowflakes overlay (purely decorative) -->
   <div class="snowflakes" aria-hidden="true">
     <div class="snowflake">❄️</div>
     <div class="snowflake">❄️</div>
@@ -24,28 +25,57 @@
     <h1>❄️ Snowman Rescue ❄️</h1>
     <p>Guess the winter word before the snowman melts!</p>
 
+    <!-- Instructions button (centered) and panel with more detailed instructions -->
+    <button id="instructions-btn">Instructions</button>
+
+    <div id="instructions-panel" class="hidden">
+      <p><strong>How to Play:</strong></p>
+      <ul>
+        <li>A secret winter-themed word is chosen automatically.</li>
+        <li>Click the buttons on the on-screen keyboard to guess letters.</li>
+        <li>Correct letters are revealed in the word display.</li>
+        <li>Incorrect guesses melt the snowman. You have 5 chances.</li>
+        <li>You may use one hint each round.</li>
+        <li>If you wish to stop early, click “Reveal Word.”</li>
+        <li>Click “Play Again” to start a new round.</li>
+      </ul>
+    </div>
+
+    <!-- Snowman image that changes as the player guesses wrong letters -->
     <img id="snowman-img" src="images/snowman0.png" alt="Snowman" />
 
+    <!-- Tracks remaining wrong guesses -->
     <p id="guesses-left">Wrong guesses left: 5</p>
 
+    <!-- Shows underscores and revealed letters -->
     <div id="word-display"></div>
 
+    <!-- Shows feedback like “Nice guess!” or win/lose messages -->
     <p id="message">Guess a letter to start warming up! ❄️</p>
 
-    <!-- 🔍 Hint button + hint text -->
+    <!-- Hint controls: button + area where hint text appears -->
     <button id="hint-btn">Need a hint?</button>
     <p id="hint-text"></p>
 
+    <!-- Reveal Word button (lets the player give up and see the answer) -->
+    <button id="reveal-btn">Reveal Word</button>
+
+    <!-- Shows a list of wrong letters guessed so far -->
     <p id="wrong-letters">Wrong letters: </p>
 
+    <!-- On-screen keyboard buttons get generated here with JavaScript -->
     <div id="keyboard"></div>
 
+    <!-- Starts a brand new game -->
     <button id="reset-btn">Play Again</button>
   </div>
 
+  <!-- Main game logic -->
   <script src="app.js"></script>
 </body>
 </html>
+
+
 
 
 

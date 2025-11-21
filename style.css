@@ -1,4 +1,6 @@
-/* Basic page styling */
+/* ============================
+   Global page styling
+============================ */
 body {
   font-family: Arial, sans-serif;
   background-color: #87ceeb; /* sky blue */
@@ -9,7 +11,9 @@ body {
   color: #000; /* black text */
 }
 
-/* Main game card */
+/* ============================
+   Game container (card)
+============================ */
 #game-container {
   max-width: 600px;
   margin: 60px auto 40px;
@@ -28,7 +32,7 @@ h1 {
   font-size: 32px;
 }
 
-/* General text */
+/* General paragraph spacing */
 p {
   margin: 8px 0;
 }
@@ -39,27 +43,27 @@ p {
   margin: 15px 0 10px;
 }
 
-/* Wrong guesses left */
+/* Remaining guesses text */
 #guesses-left {
   font-size: 18px;
   font-weight: bold;
 }
 
-/* Hidden word display */
+/* Hidden word display (underscores / letters) */
 #word-display {
   font-size: 32px;
   letter-spacing: 10px;
   margin: 20px 0;
 }
 
-/* Game message */
+/* Message area (instructions, win/lose text, etc.) */
 #message {
   font-size: 20px;
   min-height: 30px;
   margin: 10px 0;
 }
 
-/* Win and lose message colors */
+/* Color for win/lose messages */
 .win-message {
   color: #2e7d32; /* green */
 }
@@ -73,7 +77,9 @@ p {
   font-size: 16px;
 }
 
-/* Keyboard letter buttons */
+/* ============================
+   Keyboard buttons
+============================ */
 #keyboard {
   margin-top: 15px;
 }
@@ -98,7 +104,9 @@ p {
   cursor: not-allowed;
 }
 
-/* Reset button */
+/* ============================
+   Reset button styling
+============================ */
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
@@ -114,33 +122,36 @@ p {
   background-color: #1a8be0;
 }
 
-/* Win animation on the game card */
+/* ============================
+   Win / lose card effects
+============================ */
 #game-container.win {
   animation: winPulse 0.8s ease-in-out 3;
   border: 3px solid #2e7d32;
 }
 
-/* Lose styling on the game card */
 #game-container.lose {
   border: 3px solid #c62828;
 }
 
-/* Win pulse animation */
+/* Subtle "pulse" effect when the player wins */
 @keyframes winPulse {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.03); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
   100% { transform: scale(1); }
 }
 
-/* ❄️ Simple Falling Snowflakes ❄️ */
+/* ============================
+   Falling snowflakes background
+============================ */
 .snowflakes {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: 1; /* behind game card */
+  pointer-events: none; /* allows clicks to pass through to the game */
+  z-index: 1; /* behind the main game card */
 }
 
 .snowflake {
@@ -151,7 +162,7 @@ p {
   color: white;
 }
 
-/* Different positions & speeds */
+/* Each snowflake has a different horizontal position and fall speed */
 .snowflake:nth-child(1) { left: 10%; animation-duration: 8s; }
 .snowflake:nth-child(2) { left: 20%; animation-duration: 10s; }
 .snowflake:nth-child(3) { left: 30%; animation-duration: 12s; }
@@ -170,13 +181,15 @@ p {
   }
 }
 
-/* 🎉 Confetti elements */
+/* ============================
+   Confetti (win animation)
+============================ */
 .confetti {
   position: fixed;
   top: -20px;
   font-size: 24px;
   pointer-events: none;
-  z-index: 20; /* above everything */
+  z-index: 20; /* above the game and snow */
   animation: confettiFall 3s ease-in forwards;
 }
 
@@ -191,7 +204,9 @@ p {
   }
 }
 
-/* Hint button */
+/* ============================
+   Hint button and hint text
+============================ */
 #hint-btn {
   margin-top: 10px;
   padding: 6px 14px;
@@ -212,12 +227,80 @@ p {
   cursor: not-allowed;
 }
 
-/* Hint text */
+/* Hint text displayed under the button */
 #hint-text {
   margin-top: 8px;
   font-size: 16px;
   font-style: italic;
 }
+
+/* ============================
+   Reveal Word button
+============================ */
+#reveal-btn {
+  margin-top: 10px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #fff7e6;
+  border: 2px solid #ff9800;
+  border-radius: 5px;
+  color: #000;
+}
+
+#reveal-btn:hover:not(:disabled) {
+  background-color: #ffe0b2;
+}
+
+#reveal-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================
+   Instructions button & panel
+============================ */
+
+/* Simple helper to hide elements */
+.hidden {
+  display: none;
+}
+
+/* Instructions button centered at the top */
+#instructions-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 2px solid #4cb1ff;
+  border-radius: 5px;
+  color: #000;
+}
+
+#instructions-btn:hover {
+  background-color: #f0f8ff;
+}
+
+/* The detailed instructions panel */
+#instructions-panel {
+  max-width: 500px;
+  margin: 15px auto;
+  padding: 12px;
+  background-color: #f0faff;
+  border: 1px solid #cde8ff;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 15px;
+}
+
+#instructions-panel ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+
 
 
 
