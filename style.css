@@ -1,6 +1,7 @@
-/* ============================
+/* 
    Global page styling
-============================ */
+   How the game will appear online
+*/
 body {
   font-family: Arial, sans-serif;
   background-color: #87ceeb; /* sky blue */
@@ -11,9 +12,9 @@ body {
   color: #000; /* black text */
 }
 
-/* ============================
-   Game container (card)
-============================ */
+/*    Game container (card)
+   the center of the screen where the game will be played
+*/
 #game-container {
   max-width: 600px;
   margin: 60px auto 40px;
@@ -77,9 +78,9 @@ p {
   font-size: 16px;
 }
 
-/* ============================
+/* 
    Keyboard buttons
-============================ */
+ */
 #keyboard {
   margin-top: 15px;
 }
@@ -104,9 +105,9 @@ p {
   cursor: not-allowed;
 }
 
-/* ============================
+/* 
    Reset button styling
-============================ */
+*/
 #reset-btn {
   margin-top: 20px;
   padding: 10px 20px;
@@ -122,9 +123,9 @@ p {
   background-color: #1a8be0;
 }
 
-/* ============================
+/* 
    Win / lose card effects
-============================ */
+*/
 #game-container.win {
   animation: winPulse 0.8s ease-in-out 3;
   border: 3px solid #2e7d32;
@@ -141,9 +142,9 @@ p {
   100% { transform: scale(1); }
 }
 
-/* ============================
+/* 
    Falling snowflakes background
-============================ */
+ */
 .snowflakes {
   position: fixed;
   top: 0;
@@ -152,7 +153,7 @@ p {
   height: 100%;
   pointer-events: none; /* allows clicks to pass through to the game */
   z-index: 1; /* behind the main game card */
-}
+} 
 
 .snowflake {
   position: absolute;
@@ -181,9 +182,9 @@ p {
   }
 }
 
-/* ============================
+/* 
    Confetti (win animation)
-============================ */
+*/
 .confetti {
   position: fixed;
   top: -20px;
@@ -204,9 +205,9 @@ p {
   }
 }
 
-/* ============================
+/* 
    Hint button and hint text
-============================ */
+ */
 #hint-btn {
   margin-top: 10px;
   padding: 6px 14px;
@@ -234,9 +235,9 @@ p {
   font-style: italic;
 }
 
-/* ============================
+/* 
    Reveal Word button
-============================ */
+*/
 #reveal-btn {
   margin-top: 10px;
   padding: 6px 14px;
@@ -257,9 +258,9 @@ p {
   cursor: not-allowed;
 }
 
-/* ============================
+/* 
    Instructions button & panel
-============================ */
+*/
 
 /* Simple helper to hide elements */
 .hidden {
