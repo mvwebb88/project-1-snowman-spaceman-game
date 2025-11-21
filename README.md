@@ -53,6 +53,7 @@ CSS3 — styling, custom snow animation, responsive layout
 JavaScript (ES6) — game logic, DOM updates, confetti effect
 Git & GitHub — version control and deployment
 GitHub Pages — hosting the deployed game
+Adobe Illustrator
 
 🌟 Next Steps — Future Enhancements
 
